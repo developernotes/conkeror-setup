@@ -39,9 +39,10 @@ interactive("instapaper_text", "Display current page with Instapaper Text", inst
 define_key(content_buffer_normal_keymap, "C-t", "find-url-new-buffer");
 define_key(content_buffer_normal_keymap, "C-w", "kill-current-buffer");
 define_key(default_global_keymap, "C-c i", "instapaper");
-define_key(default_global_keymap, "C-c t", "instapaper_text")
+define_key(default_global_keymap, "C-c t", "instapaper_text");
+define_key(gmail_keymap, "return", null, $fallthrough);
 
-// allow Google Experimental Search to operate
+// allow google experimental search to operate
 let (google_search_re = build_url_regex(
          $domain = "google",
          $allow_www = true,
