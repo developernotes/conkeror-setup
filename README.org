@@ -1,0 +1,7 @@
+** Installation:
+
+In your shell:
+
+:     $ git clone git://github.com/developernotes/conkeror-setup.git
+:     $ cd conkeror-setup
+:     $ cp .conkerorrc ~
