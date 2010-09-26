@@ -10,9 +10,36 @@ url_completion_use_webjumps = true;
 cwd = get_home_directory();
 cwd.append("Desktop");
 
+define_webjump("instapaper", "javascript:var d=document,z=d.createElement('scr'+'ipt'),b=d.body;try{if(!b)throw(0);d.title='(Saving...) '+d.title;z.setAttribute('src','http://www.instapaper.com/j/OWjx8DBWze7g');b.appendChild(z);}catch(e){alert('Please wait until the page has loaded.');}void(0)", $description = "Add current page to Instapaper");
+
+define_webjump("instapaper-text", "javascript:function iptxt(){var d=document;try{if(!d.body)throw(0);window.location='http://www.instapaper.com/text?u='+encodeURIComponent(d.location.href);}catch(e){alert('Please wait until the page has loaded.');}}iptxt();void(0)", $description = "Display current page with Instapaper Text");
+
+function instapaper(I) {
+  var d= I.window.buffers.current.document;
+  var z= d.createElement('scr'+'ipt');
+  var b=d.body;
+  try{if(!b)throw(0);d.title='(Saving...) '+d.title;z.setAttribute('src','http://www.instapaper.com/j/OWjx8DBWze7g');b.appendChild(z);}catch(e){alert('Please wait until the page has loaded.');}void(0);
+}
+
+function instapaper_text(I) {
+   var d = I.window.buffers.current.document;
+   try{
+     d.location='http://www.instapaper.com/text?u='+encodeURIComponent(d.location.href);
+   }
+   catch(e){
+     I.window.alert('Please wait until the page has loaded.');
+   }
+   void(0);
+}
+                          
+interactive("instapaper", "Add page to Instapaper", instapaper);
+interactive("instapaper_text", "Display current page with Instapaper Text", instapaper_text);
+
 // additional keybindings
 define_key(content_buffer_normal_keymap, "C-t", "find-url-new-buffer");
 define_key(content_buffer_normal_keymap, "C-w", "kill-current-buffer");
+define_key(default_global_keymap, "C-c i", "instapaper");
+define_key(default_global_keymap, "C-c t", "instapaper_text")
 
 // allow Google Experimental Search to operate
 let (google_search_re = build_url_regex(
